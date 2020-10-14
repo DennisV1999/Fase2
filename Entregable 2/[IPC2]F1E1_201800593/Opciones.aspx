@@ -15,7 +15,7 @@
         <asp:Button ID="Button2" runat="server" Text="Un Jugador" Width="200px"/>
         <br />
         <br />
-        <asp:Button ID="Button3" runat="server" Text="Dos Jugadores" Width="200px"/>
+        <asp:Button ID="Button3" runat="server" Text="Dos Jugadores" Width="200px" OnClick="Button3_Click"/>
         <br />
         <br />
         <asp:Button ID="Button4" runat="server" Text="Torneos" Width="200px"/>

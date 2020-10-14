@@ -163,5 +163,23 @@ namespace _IPC2_F1E1_201800593
                 }
             }
         }
+
+        public void checkForValidMove()
+        {
+            Coin[,] fichas = tablero.obtenerTablero();
+
+            if(turn == 1)
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if(fichas[i,j].Colores == Color.Black)
+                        {
+                        }
+                    }
+                }
+            }
+        }
     }
 }

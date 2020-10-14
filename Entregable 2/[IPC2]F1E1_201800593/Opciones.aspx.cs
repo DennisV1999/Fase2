@@ -18,5 +18,10 @@ namespace _IPC2_F1E1_201800593
         {
             Response.Redirect("Estadisticas.aspx");
         }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Tablero.aspx");
+        }
     }
 }
