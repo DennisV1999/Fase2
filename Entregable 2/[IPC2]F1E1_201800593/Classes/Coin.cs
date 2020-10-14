@@ -8,40 +8,47 @@ namespace _IPC2_F1E1_201800593.Classes
 {
     public class Coin
     {
-        private int up;
-        private int down;
-        private int right;
-        private int left;
+        private Coin up;
+        private Coin down;
+        private Coin right;
+        private Coin left;
         private Color color;
-        
+        private int posx;
+        private int posy;
+
         public Coin()
         {
-            up = 0;
-            down = 0;
-            right = 0;
-            left = 0;
             color = Color.Transparent;
+            posx = -1;
+            posy = -1;
         }
 
-        public int Up
+        public Coin(int i, int j)
+        {
+            color = Color.Transparent;
+            posx = j;
+            posy = i;
+        }
+
+        public Coin Up
         {
             get { return up; }
             set { up = value; }
         }
 
-        public int Down
+        public Coin Down
         {
             get { return down; }
             set { down = value; }
         }
 
-        public int Right
+        public Coin Right
         {
             get { return right; }
             set { right = value; }
         }
 
-        public int Left
+        public Coin Left
         {
             get { return left; }
             set { left = value; }
@@ -51,6 +58,18 @@ namespace _IPC2_F1E1_201800593.Classes
         {
             get { return color; }
             set { color = value; }
+        }
+
+        public int Posy
+        {
+            get { return posy; }
+            set { posy = value; }
+        }
+
+        public int Posx
+        {
+            get { return posx; }
+            set { posx = value; }
         }
     }
 }

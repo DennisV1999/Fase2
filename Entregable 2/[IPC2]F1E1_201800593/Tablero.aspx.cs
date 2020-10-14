@@ -26,11 +26,14 @@ namespace _IPC2_F1E1_201800593
             {
                 for(int j = 0;j < 8; j++)
                 {
+                    int u = 0;
+                    int r = 0;
+                    u = i;
+                    r = j;
                     btnGrid[i, j] = new ImageButton();
-
                     btnGrid[i, j].Width = cellsize;
                     btnGrid[i, j].Height = cellsize;
-                    btnGrid[i, j].Click += Grid_Button_Click;
+                    btnGrid[i, j].Click += new ImageClickEventHandler((send,l) => Grid_Button_Click(send,l,u,r));
                     btnGrid[i, j].Style.Add("margin-bottom", "-5px");
                     btnGrid[i, j].ImageUrl = "~/img/default.png";
                     btnGrid[i, j].CausesValidation = false;
@@ -38,6 +41,11 @@ namespace _IPC2_F1E1_201800593
                     BoardPanel.Controls.Add(btnGrid[i, j]);
                 }
             }
+            btnGrid[3, 3].Enabled = false;
+            btnGrid[3, 4].Enabled = false;
+            btnGrid[4, 3].Enabled = false;
+            btnGrid[4, 4].Enabled = false;
+
 
             int m = 0;
             foreach(char c in alfabeto)
@@ -100,9 +108,10 @@ namespace _IPC2_F1E1_201800593
 
                 RightPanel.Controls.Add(lblGrid[p]);
             }
+            updateBoard();
         }
 
-        private void Grid_Button_Click(object sender, EventArgs e)
+        private void Grid_Button_Click(object sender, EventArgs e,int i, int j)
         {
             ImageButton clickedbtn = (ImageButton)sender;
             if (turn == 1)
@@ -111,7 +120,8 @@ namespace _IPC2_F1E1_201800593
                 clickedbtn.Enabled = false;
                 turn = 2;
                 lbljugador.Text = "Turno de: Jugador 2";
-                checkBoard();
+                
+                checkBoard(i,j);
             }
             else if(turn == 2)
             {
@@ -119,22 +129,36 @@ namespace _IPC2_F1E1_201800593
                 clickedbtn.Enabled = false;
                 turn = 1;
                 lbljugador.Text = "Turno de: Jugador 1";
-                checkBoard();
+                checkBoard(i,j);
             }
         }
-        public void checkBoard()
+        public void checkBoard(int i, int j)
         {
-            for(int i = 0; i < 8; i++)
+            if (btnGrid[i, j].ImageUrl.ToString().Contains("blanco"))
+            {
+                tablero.setColor(i, j, "blanco");
+            }
+            else if (btnGrid[i, j].ImageUrl.ToString().Contains("negro"))
+            {
+                tablero.setColor(i, j, "negro");
+            }
+            updateBoard();
+        }
+        public void updateBoard()
+        {
+            Coin[,] fichas = tablero.obtenerTablero();
+
+            for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if (btnGrid[i, j].ImageUrl.ToString().Contains("blanco"))
+                    if (fichas[i, j].Colores == Color.White)
                     {
-                        tablero.setColor(i, j, "blanco");
+                        btnGrid[i, j].ImageUrl = "~/img/blanco.png";
                     }
-                    else if (btnGrid[i, j].ImageUrl.ToString().Contains("negro"))
+                    else if (fichas[i, j].Colores == Color.Black)
                     {
-                        tablero.setColor(i, j, "negro");
+                        btnGrid[i, j].ImageUrl = "~/img/negro.png";
                     }
                 }
             }
